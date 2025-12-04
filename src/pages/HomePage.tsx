@@ -17,25 +17,25 @@ const processSteps = [
     id: 1,
     title: "Beratung & Strategie",
     desc: "Am Anfang steht das Verstehen. Wir analysieren Ihre Marke, Ihre Ziele und Ihre Zielgruppe, um ein räumliches Narrativ zu entwickeln, das funktioniert.",
-    img: "/src/assets/processSteps/beratung_Strategie.jpg"
+    img: "/processSteps/beratung_Strategie.jpg"
   },
   {
     id: 2,
     title: "Design & Architektur",
     desc: "Unsere Architekten übersetzen Konzepte in präzise Pläne. Fotorealistische 3D-Visualisierungen geben Ihnen Sicherheit noch vor dem ersten Bauabschnitt.",
-    img: "/src/assets/processSteps/design_Architektur.jpg"
+    img: "/processSteps/design_Architektur.jpg"
   },
   {
     id: 3,
     title: "Produktion",
     desc: "In unseren Berliner Werkstätten fertigen wir mit höchster Präzision. Ob Holz, Metall oder Kunststoff – wir beherrschen den Materialmix perfekt.",
-    img: "/src/assets/processSteps/produktion.jpg"
+    img: "/processSteps/produktion.jpg"
   },
   {
     id: 4,
     title: "Logistik & Montage",
     desc: "Wir bringen Ihren Stand sicher ans Ziel. Europaweit. Unser festes Montageteam garantiert einen stressfreien Aufbau und eine pünktliche Übergabe.",
-    img: "/src/assets/processSteps/logistik_Montage.jpg"
+    img: "/processSteps/logistik_Montage.jpg"
   }
 ];
 
@@ -44,55 +44,55 @@ const materials = [
     id: 1,
     name: "Holzmanufaktur",
     desc: "Präzision in Eiche, Nussbaum und innovativen Verbundstoffen.",
-    img: "/src/assets/materials/holzmanufaktur.jpg"
+    img: "/materials/holzmanufaktur.jpg"
   },
   {
     id: 2,
     name: "Metallbau",
     desc: "Statische Exzellenz trifft auf filigrane Ästhetik in Stahl und Alu.",
-    img: "/src/assets/materials/metallbau.jpg"
+    img: "/materials/metallbau.jpg"
   },
   {
     id: 3,
     name: "Oberflächen",
     desc: "Lackierungen, Textilien und Folierungen für die perfekte Haptik.",
-    img: "/src/assets/materials/oberflaechen.jpg"
+    img: "/materials/oberflaechen.jpg"
   },
   {
     id: 4,
     name: "Lichttechnik",
     desc: "Atmosphärische Inszenierung durch intelligente LED-Systeme.",
-    img: "/src/assets/materials/lichttechnik.jpg"
+    img: "/materials/lichttechnik.jpg"
   }
 ];
 
 const zoomImages = [
     {
-        src: '/src/assets/zoomImages/zoom1.png',
+        src: '/zoomImages/zoom1.png',
         alt: 'Modern architecture building',
     },
     {
-        src: '/src/assets/zoomImages/zoom2.png',
+        src: '/zoomImages/zoom2.png',
         alt: 'Wood Detail',
     },
     {
-        src: '/src/assets/zoomImages/zoom3.png',
+        src: '/zoomImages/zoom3.png',
         alt: 'Light Installation',
     },
     {
-        src: '/src/assets/zoomImages/zoom4.png',
+        src: '/zoomImages/zoom4.png',
         alt: 'Curved Wood',
     },
     {
-        src: '/src/assets/zoomImages/zoom5.png',
+        src: '/zoomImages/zoom5.png',
         alt: 'Interior Design',
     },
     {
-        src: '/src/assets/zoomImages/zoom6.png',
+        src: '/zoomImages/zoom6.png',
         alt: 'Construction Detail',
     },
     {
-        src: '/src/assets/zoomImages/zoom7.png',
+        src: '/zoomImages/zoom7.png',
         alt: 'Finished Booth',
     },
 ];
