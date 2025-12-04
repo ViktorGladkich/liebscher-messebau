@@ -1,11 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap');
-
 body {
-  background-color: #EFEDE8;
+  background-color: #efede8;
   color: #191817;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
@@ -17,17 +16,17 @@ body {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #EFEDE8;
+  background: #efede8;
 }
 ::-webkit-scrollbar-thumb {
-  background: #D1CDC4;
+  background: #d1cdc4;
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #B0987A;
+  background: #b0987a;
 }
 
 ::selection {
-  background-color: #B0987A;
+  background-color: #b0987a;
   color: white;
 }
