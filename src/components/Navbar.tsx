@@ -57,9 +57,9 @@ export const Navbar: React.FC = () => {
   // Updated navigation structure - Added Home, Removed Journal
   const navLinks = [
     { name: "Startseite", to: "/", label: "01" },
-    { name: "Kollektion", to: "/projects", label: "02" },
-    { name: "Expertise", to: "/expertise", label: "03" },
-    { name: "Studio", to: "/about", label: "04" },
+    { name: "Projekte", to: "/projects", label: "02" },
+    { name: "Leistungen", to: "/expertise", label: "03" },
+    { name: "Über uns", to: "/about", label: "04" },
     { name: "Kontakt", to: "/contact", label: "05" },
   ];
 

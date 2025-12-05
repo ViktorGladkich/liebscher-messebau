@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -10,25 +9,25 @@ const processes = [
     id: '01',
     title: 'Strategie & Konzeption',
     text: 'Jedes Projekt beginnt mit Zuhören. Wir analysieren Ihre Marke, Ihre Ziele und Ihre Zielgruppe. Unser Designteam entwickelt daraus räumliche Narrative, die nicht nur gut aussehen, sondern funktionieren. Wir denken in Besucherströmen, Interaktionspunkten und emotionalen Kurven.',
-    image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2301&auto=format&fit=crop'
+    image: '/processSteps/beratung_Strategie.jpg'
   },
   {
     id: '02',
     title: 'Design & Architektur',
     text: 'Unsere Architekten übersetzen das Konzept in präzise Pläne. Wir nutzen modernste CAD-Technologie und VR-Visualisierungen, damit Sie Ihren Stand erleben können, bevor der erste Nagel eingeschlagen wird. Lichtplanung, Materialauswahl und Statik gehen Hand in Hand.',
-    image: 'https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=2700&auto=format&fit=crop'
+    image: '/processSteps/design_Architektur.jpg'
   },
   {
     id: '03',
     title: 'Produktion & Handwerk',
     text: 'In unseren Berliner Werkstätten trifft traditionelles Handwerk auf CNC-Präzision. Unsere Tischler, Metallbauer und Lackierer fertigen jedes Element mit höchstem Anspruch. Wir glauben an Materialien, die altern, nicht verschleißen.',
-    image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2670&auto=format&fit=crop'
+    image: '/processSteps/produktion.jpg'
   },
   {
     id: '04',
     title: 'Logistik & Realisierung',
     text: 'Ein Messestand ist ein logistisches Meisterwerk. Unser Team koordiniert den weltweiten Transport, Zollformalitäten und den Aufbau vor Ort. Just-in-Time, millimetergenau und stressfrei für Sie. Wenn die Messe beginnt, ist alles perfekt.',
-    image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2670&auto=format&fit=crop'
+    image: '/processSteps/logistik_Montage.jpg'
   }
 ];
 
@@ -48,6 +47,22 @@ export const ExpertisePage: React.FC = () => {
     window.scrollTo(0, 0);
     
     const ctx = gsap.context(() => {
+      // Hero Reveal Animation
+      gsap.fromTo(
+        ".hero-char",
+        { y: 150, opacity: 0, rotateX: -90, scale: 0.8 },
+        {
+          y: 0,
+          opacity: 1,
+          rotateX: 0,
+          scale: 1,
+          duration: 1.2,
+          stagger: 0.05,
+          ease: "back.out(1.7)",
+          delay: 0.2,
+        }
+      );
+
       // Intro Reveal
       gsap.fromTo('.exp-reveal',
         { y: 50, opacity: 0 },
@@ -55,7 +70,6 @@ export const ExpertisePage: React.FC = () => {
       );
 
       // Process Sections Parallax & Reveal
-      // Use matchMedia to handle animations differently or just ensure triggers are robust
       gsap.utils.toArray<HTMLElement>('.process-section').forEach((section) => {
         // Image Parallax
         const img = section.querySelector('.process-img');
@@ -87,7 +101,7 @@ export const ExpertisePage: React.FC = () => {
               ease: 'power3.out',
               scrollTrigger: {
                 trigger: section,
-                start: 'top 85%', // Trigger earlier to ensure visibility
+                start: 'top 85%',
               }
             }
           );
@@ -112,31 +126,43 @@ export const ExpertisePage: React.FC = () => {
   }, []);
 
   return (
-    <div ref={containerRef} className="bg-secondary min-h-screen pt-32 pb-32">
+    <div ref={containerRef} className="bg-secondary min-h-screen">
       
-      {/* Header */}
-      <div className="container mx-auto px-6 md:px-12 mb-24 md:mb-32">
-        <div className="max-w-4xl">
-           <span className="exp-reveal block text-xs font-bold uppercase tracking-widest text-accent mb-8">
-             02 — Unsere Expertise
-           </span>
-           <h1 className="exp-reveal text-5xl md:text-7xl font-serif leading-[1.1] text-primary mb-12">
-             Von der Skizze zur<br/>
-             <span className="italic text-accent">gebauten Realität.</span>
-           </h1>
-           <p className="exp-reveal text-lg md:text-xl font-light leading-relaxed text-gray-600 max-w-2xl">
-             Wir verstehen uns nicht nur als Handwerker, sondern als Partner für Ihre Markenkommunikation. Unser Prozess ist transparent, strukturiert und auf Exzellenz ausgerichtet.
-           </p>
-        </div>
-      </div>
+      {/* Cinematic Header with Background Image */}
+      <header className="relative w-full h-[90dvh] md:min-h-[90vh] flex flex-col justify-end pb-16 md:pb-24 overflow-hidden">
+          {/* Header Background Image (Full Width) */}
+          <div className="absolute inset-0 z-0">
+            <div className="absolute inset-0 bg-gradient-to-t from-[#111] via-[#111]/70 to-[#111]/30 z-10" />
+            <img
+              src="/projects/ecoStand2.jpg"
+              className="w-full h-full object-cover opacity-80"
+              alt="Atelier Background"
+            />
+          </div>
+
+          <div className="relative z-20 container mx-auto px-6 md:px-12">
+            <h1 className="text-[14vw] md:text-[13vw] font-serif leading-[0.85] text-white/90 tracking-tighter uppercase overflow-hidden mb-8 md:mb-12">
+              {"Leistungen".split("").map((char, i) => (
+                <span key={i} className="hero-char inline-block origin-bottom">
+                  {char === " " ? "\u00A0" : char}
+                </span>
+              ))}
+            </h1>
+
+              <div className="hero-sub grid grid-cols-1 md:grid-cols-1 gap-8 md:gap-12 max-w-5xl border-t border-white/10 pt-8 md:pt-12">
+              <h2 className="text-2xl md:text-3xl font-serif leading-tight text-white">
+                 Von der Skizze zur <span className="italic text-accent">gebauten Realität.</span>
+              </h2>
+              <p className="text-sm md:text-lg font-light leading-relaxed text-gray-400">
+                 Wir verstehen uns nicht nur als Handwerker, sondern als Partner für Ihre Markenkommunikation. Unser Prozess ist transparent, strukturiert und auf Exzellenz ausgerichtet.
+              </p>
+           </div>
+          </div>
+        </header>
 
       {/* Process Steps */}
       <div className="flex flex-col gap-0 mb-32">
         {processes.map((proc, index) => (
-          // Adjusted for mobile: 
-          // 1. Removed sticky top-0 on mobile (added md:sticky)
-          // 2. Changed min-h-[80vh] to md:min-h-[80vh]
-          // 3. Adjusted padding
           <div key={proc.id} className="process-section relative md:min-h-[80vh] flex items-center border-t border-primary/10 md:sticky md:top-0 bg-secondary">
             <div className="container mx-auto px-6 md:px-12 py-16 md:py-24">
               <div className={`flex flex-col md:flex-row gap-12 md:gap-16 items-center ${index % 2 === 1 ? 'md:flex-row-reverse' : ''}`}>
@@ -146,7 +172,7 @@ export const ExpertisePage: React.FC = () => {
                    <img 
                      src={proc.image} 
                      alt={proc.title} 
-                     className="process-img w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                     className="process-img w-full h-full object-cover transition-all duration-700"
                    />
                 </div>
 
@@ -209,7 +235,7 @@ export const ExpertisePage: React.FC = () => {
       </section>
 
       {/* CTA */}
-      <div className="container mx-auto px-6 md:px-12 mt-16 text-center">
+      <div className="container mx-auto px-6 md:px-12 mt-16 text-center pb-32">
          <h2 className="text-3xl md:text-5xl font-serif mb-8">Bereit für den nächsten Schritt?</h2>
          <a href="#/contact" className="inline-block text-sm uppercase tracking-widest border-b border-primary pb-1 hover:text-accent hover:border-accent transition-colors">
            Projekt anfragen
