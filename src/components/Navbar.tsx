@@ -72,26 +72,26 @@ export const Navbar: React.FC = () => {
       <header
         className={`fixed top-0 left-0 w-full z-50 transition-all duration-700 ${
           scrolled
-            ? "py-4 bg-secondary/80 backdrop-blur-md border-b border-primary/5"
-            : "py-8 bg-transparent"
+            ? "py-1 bg-secondary/80 backdrop-blur-md border-b border-primary/5"
+            : "py-4 bg-transparent"
         }`}
       >
-        <div className="container mx-auto px-6 md:px-12 flex justify-between items-center">
+        <div className="container mx-auto px-4 md:px-2 flex justify-between items-center">
           <Link 
             to="/" 
-            className="pointer-events-auto z-50 relative group cursor-hover flex items-center gap-4"
+            className="pointer-events-auto z-50 relative group cursor-hover flex items-center "
             aria-label="Liebscher Home"
           >
-             {/* Icon: Abstract geometric L/Square composition */}
-             <div className="relative w-10 h-10 md:w-11 md:h-11">
-                {/* Solid Block (Matter) */}
-                <div className="absolute top-0 left-0 w-7 h-7 bg-current transition-transform duration-500 ease-expo-out group-hover:translate-x-1 group-hover:translate-y-1"></div>
-                {/* Outline Frame (Space) */}
-                <div className="absolute bottom-0 right-0 w-7 h-7 border-2 border-current transition-transform duration-500 ease-expo-out group-hover:-translate-x-1 group-hover:-translate-y-1"></div>
+             <div className={`transition-opacity duration-700 ${scrolled ? 'opacity-100' : 'opacity-0'}`}>
+               <img 
+                 src="/logo/liebscher_logo.png" 
+                 alt="Liebscher Logo" 
+                 className="w-32 md:w-20 object-contain brightness-150"
+               />
              </div>
              
              {/* Typographic Lockup */}
-             <div className="flex flex-col justify-center">
+             <div className={`flex flex-col justify-center -ml-4 transition-opacity duration-700 ${scrolled ? 'opacity-100' : 'opacity-0'}`}>
                <span className="text-xl md:text-2xl font-sans font-bold leading-none tracking-tight uppercase">
                  Liebscher
                </span>
@@ -106,20 +106,20 @@ export const Navbar: React.FC = () => {
 
           <div className="flex items-center gap-8">
             <button
-              className={`z-50 flex items-center gap-3 focus:outline-none group mix-blend-difference cursor-hover ${
-                isOpen ? "text-secondary" : "text-primary"
-              }`}
-              onClick={() => setIsOpen(!isOpen)}
-              aria-label={isOpen ? "Menü schließen" : "Menü öffnen"}
-              aria-expanded={isOpen}
-            >
-              <span className="hidden md:block text-xs uppercase tracking-widest group-hover:opacity-70 transition-opacity">
-                {isOpen ? "Schließen" : "Menü"}
-              </span>
-              <div className="relative w-8 h-8 flex items-center justify-center">
-                {isOpen ? <X size={24} /> : <Menu size={24} />}
-              </div>
-            </button>
+  className={`z-50 flex items-center gap-3 focus:outline-none group cursor-hover transition-colors duration-300 ${
+    scrolled ? "text-primary" : "text-secondary"
+  }`}
+  onClick={() => setIsOpen(!isOpen)}
+  aria-label={isOpen ? "Menü schließen" : "Menü öffnen"}
+  aria-expanded={isOpen}
+>
+  <span className="hidden md:block text-xs uppercase tracking-widest transition-colors">
+    {isOpen ? "Schließen" : "Menü"}
+  </span>
+  <div className="relative w-8 h-8 flex items-center justify-center transition-colors">
+    {isOpen ? <X size={24} /> : <Menu size={24} />}
+  </div>
+</button>
           </div>
         </div>
       </header>

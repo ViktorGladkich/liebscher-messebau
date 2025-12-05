@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { projectsData } from "../lib/data";
 import type { ProjectData } from "../types";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 const categories = [
   "Alle",
@@ -184,31 +185,38 @@ export const ProjectsPage: React.FC = () => {
 };
 
 const ProjectCard: React.FC<{ project: ProjectData }> = ({ project }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
+  const y = useTransform(scrollYProgress, [0, 1], [50, -50]);
+
   return (
     <Link
       to={`/projects/${project.id}`}
       className="group cursor-pointer w-full block"
     >
-      {/* Image Container with Parallax Hover Effect */}
-      <div className="relative overflow-hidden aspect-[3/4] mb-8 bg-gray-200">
-        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500 z-10 flex items-center justify-center">
-          <div className="w-24 h-24 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center scale-0 group-hover:scale-100 transition-transform duration-500 ease-out border border-white/20">
-            <span className="text-white text-xs uppercase tracking-widest">
-              View
+      <div ref={ref}>
+        {/* Image Container with Parallax Hover Effect */}
+        <div className="relative overflow-hidden aspect-[3/4] mb-8 bg-gray-200">
+          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500 z-10 flex items-center justify-center">
+            <div className="w-24 h-24 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center scale-0 group-hover:scale-100 transition-transform duration-500 ease-out border border-white/20">
+              <span className="text-white text-xs uppercase tracking-widest">
+                View
+              </span>
+            </div>
+          </div>
+          <motion.img
+            src={project.imageUrl}
+            alt={project.title}
+            className="w-full h-full object-cover transition-transform duration-[1.5s] ease-expo-out group-hover:scale-110"
+            style={{ y }}
+          />
+
+          {/* Floating Tag inside image */}
+          <div className="absolute top-6 right-6 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 transform translate-y-[-10px] group-hover:translate-y-0">
+            <span className="bg-white/90 backdrop-blur text-primary px-4 py-2 text-[10px] uppercase tracking-widest font-bold">
+              {project.year}
             </span>
           </div>
-        </div>
-        <img
-          src={project.imageUrl}
-          alt={project.title}
-          className="w-full h-full object-cover transition-transform duration-[1.5s] ease-expo-out group-hover:scale-110"
-        />
-
-        {/* Floating Tag inside image */}
-        <div className="absolute top-6 right-6 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 transform translate-y-[-10px] group-hover:translate-y-0">
-          <span className="bg-white/90 backdrop-blur text-primary px-4 py-2 text-[10px] uppercase tracking-widest font-bold">
-            {project.year}
-          </span>
         </div>
       </div>
 

@@ -55,35 +55,43 @@ export const ExpertisePage: React.FC = () => {
       );
 
       // Process Sections Parallax & Reveal
-      gsap.utils.toArray('.process-section').forEach((section) => {
-        const element = section as HTMLElement;
-        gsap.fromTo(element.querySelector('.process-img'),
-          { scale: 1.1 },
-          { 
-            scale: 1, 
-            ease: 'none',
-            scrollTrigger: {
-              trigger: element,
-              start: 'top bottom',
-              end: 'bottom top',
-              scrub: true
+      // Use matchMedia to handle animations differently or just ensure triggers are robust
+      gsap.utils.toArray<HTMLElement>('.process-section').forEach((section) => {
+        // Image Parallax
+        const img = section.querySelector('.process-img');
+        if (img) {
+          gsap.fromTo(img,
+            { scale: 1.1 },
+            { 
+              scale: 1, 
+              ease: 'none',
+              scrollTrigger: {
+                trigger: section,
+                start: 'top bottom',
+                end: 'bottom top',
+                scrub: true
+              }
             }
-          }
-        );
+          );
+        }
         
-        gsap.fromTo(element.querySelector('.process-content'),
-          { y: 50, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 1,
-            ease: 'power3.out',
-            scrollTrigger: {
-              trigger: element,
-              start: 'top 70%',
+        // Content Fade In
+        const content = section.querySelector('.process-content');
+        if (content) {
+          gsap.fromTo(content,
+            { y: 50, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 1,
+              ease: 'power3.out',
+              scrollTrigger: {
+                trigger: section,
+                start: 'top 85%', // Trigger earlier to ensure visibility
+              }
             }
-          }
-        );
+          );
+        }
       });
 
       // Capabilities Animation
@@ -93,7 +101,7 @@ export const ExpertisePage: React.FC = () => {
           y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: 'power2.out',
           scrollTrigger: {
              trigger: '.capabilities-grid',
-             start: 'top 80%'
+             start: 'top 85%'
           } 
         }
       );
@@ -107,7 +115,7 @@ export const ExpertisePage: React.FC = () => {
     <div ref={containerRef} className="bg-secondary min-h-screen pt-32 pb-32">
       
       {/* Header */}
-      <div className="container mx-auto px-6 md:px-12 mb-32">
+      <div className="container mx-auto px-6 md:px-12 mb-24 md:mb-32">
         <div className="max-w-4xl">
            <span className="exp-reveal block text-xs font-bold uppercase tracking-widest text-accent mb-8">
              02 — Unsere Expertise
@@ -125,12 +133,16 @@ export const ExpertisePage: React.FC = () => {
       {/* Process Steps */}
       <div className="flex flex-col gap-0 mb-32">
         {processes.map((proc, index) => (
-          <div key={proc.id} className="process-section min-h-[80vh] flex items-center border-t border-primary/10 sticky top-0 bg-secondary">
-            <div className="container mx-auto px-6 md:px-12 py-24">
-              <div className={`flex flex-col md:flex-row gap-16 items-center ${index % 2 === 1 ? 'md:flex-row-reverse' : ''}`}>
+          // Adjusted for mobile: 
+          // 1. Removed sticky top-0 on mobile (added md:sticky)
+          // 2. Changed min-h-[80vh] to md:min-h-[80vh]
+          // 3. Adjusted padding
+          <div key={proc.id} className="process-section relative md:min-h-[80vh] flex items-center border-t border-primary/10 md:sticky md:top-0 bg-secondary">
+            <div className="container mx-auto px-6 md:px-12 py-16 md:py-24">
+              <div className={`flex flex-col md:flex-row gap-12 md:gap-16 items-center ${index % 2 === 1 ? 'md:flex-row-reverse' : ''}`}>
                 
                 {/* Image */}
-                <div className="w-full md:w-1/2 overflow-hidden h-[400px] md:h-[600px] relative group">
+                <div className="w-full md:w-1/2 overflow-hidden h-[300px] md:h-[600px] relative group rounded-sm shadow-md">
                    <img 
                      src={proc.image} 
                      alt={proc.title} 
@@ -140,10 +152,10 @@ export const ExpertisePage: React.FC = () => {
 
                 {/* Content */}
                 <div className="process-content w-full md:w-1/2">
-                   <span className="text-6xl md:text-8xl font-serif text-primary/10 block mb-6">{proc.id}</span>
-                   <h3 className="text-3xl md:text-4xl font-serif text-primary mb-6">{proc.title}</h3>
-                   <div className="w-12 h-[1px] bg-accent mb-8"></div>
-                   <p className="text-gray-600 text-lg font-light leading-relaxed max-w-md">
+                   <span className="text-4xl md:text-8xl font-serif text-primary/10 block mb-4 md:mb-6">{proc.id}</span>
+                   <h3 className="text-2xl md:text-4xl font-serif text-primary mb-6">{proc.title}</h3>
+                   <div className="w-12 h-[1px] bg-accent mb-6"></div>
+                   <p className="text-gray-600 text-base md:text-lg font-light leading-relaxed max-w-md">
                      {proc.text}
                    </p>
                 </div>
@@ -189,7 +201,7 @@ export const ExpertisePage: React.FC = () => {
                  <li className="flex items-center gap-4"><div className="w-2 h-2 bg-accent rounded-full"></div> Recycling-Partnerschaften</li>
                </ul>
             </div>
-            <div className="relative h-[600px] overflow-hidden">
+            <div className="relative h-[400px] md:h-[600px] overflow-hidden rounded-sm">
                <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?q=80&w=2513&auto=format&fit=crop" alt="Sustainable Materials" className="w-full h-full object-cover" />
                <div className="absolute inset-0 bg-primary/10"></div>
             </div>
