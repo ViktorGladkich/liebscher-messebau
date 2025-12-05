@@ -27,10 +27,13 @@ export const Hero: React.FC = () => {
           scrollTrigger: {
             trigger: containerRef.current,
             start: 'top top',
-            end: '+=1500', // Scroll distance
+            end: '+=1500', 
             scrub: 1, 
-            pin: true,
-            anticipatePin: 1,
+            pin: true, 
+            pinSpacing: true,
+            anticipatePin: 1, 
+            fastScrollEnd: true, 
+            invalidateOnRefresh: true, 
           }
         });
 
@@ -68,7 +71,17 @@ export const Hero: React.FC = () => {
          // Background Zoom Effect
          gsap.fromTo('.mobile-bg-img',
             { scale: 1.1 },
-            { scale: 1, duration: 2, ease: 'power2.out' }
+            { 
+              scale: 1, 
+              duration: 2, 
+              ease: 'power2.out',
+              scrollTrigger: {
+                trigger: containerRef.current,
+                start: "top top",
+                end: "bottom top",
+                scrub: true
+              }
+            }
          );
 
          // Text Reveal
@@ -84,13 +97,13 @@ export const Hero: React.FC = () => {
   }, []);
 
   return (
-    <section ref={containerRef} className="relative w-full h-[100dvh] md:h-screen overflow-hidden bg-primary">
+   <section ref={containerRef} className="relative w-full h-screen overflow-hidden bg-primary will-change-transform transform-gpu">
       <div className="md:hidden relative w-full h-full flex flex-col justify-end pb-24 px-6">
          <div className="absolute inset-0 z-0 overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/30 z-10" />
             <img 
               src={hero}
-              className="mobile-bg-img w-full h-full object-cover"
+              className="mobile-bg-img w-full h-full object-cover will-change-transform"
               alt="Architecture Detail"
             />
          </div>
@@ -144,7 +157,7 @@ export const Hero: React.FC = () => {
         </div>
 
         {/* Right Side: Image Wrapper */}
-        <div className="hero-image-wrapper absolute top-0 right-0 w-[55%] h-full overflow-hidden z-0 bg-black will-change-transform">
+        <div className="hero-image-wrapper absolute top-0 right-0 w-[55%] h-full overflow-hidden z-0 bg-black will-change-transform backface-hidden">
            <div className="hero-overlay absolute inset-0 bg-black/0 z-10 pointer-events-none transition-opacity"></div>
            <img 
              src={hero}
